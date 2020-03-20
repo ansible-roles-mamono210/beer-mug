@@ -1,21 +1,16 @@
 ---
-- name: Install Golang with yum
-  yum:
-    name: golang
-    state: present
+- name: Download Golang binary
+  unarchive:
+    src: https://dl.google.com/go/go1.14.1.linux-amd64.tar.gz
+    dest: /usr/local
+    remote_src: yes
 
-- name: Set path of Golang 1
-  template:
-    src: go.sh
-    dest: /etc/profile.d/go.sh
-    force: no
-
-- name: Set path of Golang 2
-  shell: source /etc/profile.d/go.sh
+- name: Set path of Golang
+  shell: echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile
 
 - name: Check go version
   command: go version
-  register: RESULTS 
+  register: RESULTS
   changed_when: no
   ignore_errors: true
 
@@ -24,7 +19,7 @@
   when: RESULTS is not failed
 
 - debug:
-    var: GO_PATH 
+    var: GO_PATH
 
 - name: Initialize module
   shell: go mod init github.com/misoton665/beer-mug
