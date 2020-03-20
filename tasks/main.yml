@@ -20,29 +20,29 @@
   ignore_errors: true
 
 - set_fact:
-    go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
+    GO_PATH: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
   when: RESULTS is not failed
 
 - debug:
-    var: go_path 
+    var: GO_PATH 
 
 - name: Initialize module
   shell: go mod init github.com/misoton665/beer-mug
   environment:
-    GOPATH: "{{ go_path }}"
-    PATH: "{{ go_path }}/bin:{{ ansible_env.PATH }}"
+    GOPATH: "{{ GO_PATH }}"
+    PATH: "{{ GO_PATH }}/bin:{{ ansible_env.PATH }}"
 
 - name: Download beer-mug from github
   shell: go get github.com/misoton665/beer-mug
   environment:
-    GOPATH: "{{ go_path }}"
-    PATH: "{{ go_path }}/bin:{{ ansible_env.PATH }}"
+    GOPATH: "{{ GO_PATH }}"
+    PATH: "{{ GO_PATH }}/bin:{{ ansible_env.PATH }}"
 
 - name: Install beer-mug
   shell: go install github.com/misoton665/beer-mug
   environment:
-    GOPATH: "{{ go_path }}"
-    PATH: "{{ go_path }}/bin:{{ ansible_env.PATH }}"
+    GOPATH: "{{ GO_PATH }}"
+    PATH: "{{ GO_PATH }}/bin:{{ ansible_env.PATH }}"
 
 - name: Copy beer-mug binary to /usr/loca/bin/
   copy:
