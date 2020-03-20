@@ -21,7 +21,7 @@
 
 - set_fact:
     go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
-  when: not result|failed
+  when: result is not failed
 
 - debug:
     var: go_path
