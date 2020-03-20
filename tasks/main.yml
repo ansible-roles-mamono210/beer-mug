@@ -13,6 +13,19 @@
 - name: Set path of Golang 2
   shell: source /etc/profile.d/go.sh
 
+- name: check go version
+  command: go version
+  register: result
+  changed_when: no
+  ignore_errors: true
+
+- set_fact:
+    go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
+  when: not result|failed
+
+- debug:
+    var: go_path
+
 - name: Initialize module
   shell: go mod init github.com/misoton665/beer-mug
   environment:
