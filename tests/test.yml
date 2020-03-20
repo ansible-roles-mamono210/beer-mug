@@ -3,4 +3,4 @@
   become: true
   roles:
     - geerlingguy.repo-epel
-    - matsumura.beer-mug
+    - fubarhouse.golang
