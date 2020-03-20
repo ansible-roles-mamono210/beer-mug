@@ -2,7 +2,7 @@
 - name: Download Golang binary
   unarchive:
     src: https://dl.google.com/go/go1.14.1.linux-amd64.tar.gz
-    dest: /usr/local
+    dest: /usr/local/
     remote_src: yes
 
 - name: Set path of Golang
