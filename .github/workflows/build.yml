@@ -9,13 +9,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Ansible lint
-        uses: ansible/ansible-lint-action@master
-        with:
-          targets: |
-            tasks/main.yml
-            tests/test.yml
-
+#      - name: Ansible lint
+#        uses: ansible/ansible-lint-action@master
+#        with:
+#          targets: |
+#            tasks/main.yml
+#            tests/test.yml
+#
       - name: Build CentOS7 image sudo installed
         run: docker build tests/. -t centos7sudo
 
