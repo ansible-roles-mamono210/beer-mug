@@ -13,6 +13,8 @@
   register: RESULTS
   changed_when: no
   ignore_errors: true
+  environment:
+    PATH: "/usr/local/go//bin:{{ ansible_env.PATH }}"
 
 - set_fact:
     GO_PATH: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
