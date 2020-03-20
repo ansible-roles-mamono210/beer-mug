@@ -33,13 +33,13 @@
     PATH: "{{ go_path }}/bin:{{ ansible_env.PATH }}"
 
 - name: Download beer-mug from github
-  shell: source /etc/profile.d/go.sh && go get github.com/misoton665/beer-mug
+  shell: go get github.com/misoton665/beer-mug
   environment:
     GOPATH: "{{ go_path }}"
     PATH: "{{ go_path }}/bin:{{ ansible_env.PATH }}"
 
 - name: Install beer-mug
-  shell: source /etc/profile.d/go.sh && go install github.com/misoton665/beer-mug
+  shell: go install github.com/misoton665/beer-mug
   environment:
     GOPATH: "{{ go_path }}"
     PATH: "{{ go_path }}/bin:{{ ansible_env.PATH }}"
