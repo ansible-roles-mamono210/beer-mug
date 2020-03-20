@@ -33,7 +33,7 @@ jobs:
 
       - name: Check if the command works
         run: |
-          docker exec --tty mycontainer env TERM=xterm fortune
+          docker exec --tty mycontainer env TERM=xterm beer-mug 
 
       - name: Show Ansible version
         run: ansible --version
