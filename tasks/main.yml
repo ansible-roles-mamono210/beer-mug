@@ -23,13 +23,13 @@
 - debug:
     var: GO_PATH
 
-- name: Initialize module
-  shell: go mod init github.com/misoton665/beer-mug
-  environment:
-    PATH: "/usr/local/go/bin:{{ ansible_env.PATH }}"
+#- name: Initialize module
+#  shell: go mod init github.com/misoton665/beer-mug
+#  environment:
+#    PATH: "/usr/local/go/bin:{{ ansible_env.PATH }}"
 
 - name: Download beer-mug from github
-  shell: go get github.com/misoton665/beer-mug
+  shell: go get -u github.com/misoton665/beer-mug/...
   environment:
     PATH: "/usr/local/go/bin:{{ ansible_env.PATH }}"
 
