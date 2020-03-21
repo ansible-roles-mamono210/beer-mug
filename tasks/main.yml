@@ -29,7 +29,7 @@
 #    PATH: "/usr/local/go/bin:{{ ansible_env.PATH }}"
 
 - name: Download beer-mug from github
-  shell: go get -u github.com/misoton665/beer-mug/...
+  shell: GO111MODULE=off go get -u github.com/misoton665/beer-mug/...
   environment:
     GOPATH: "{{ GO_PATH }}"
     PATH: "/usr/local/go/bin:{{ ansible_env.PATH }}"
