@@ -5,9 +5,10 @@
   vars:
     ansible_user: ansible
     go_version: 1.9.4
-    GOPATH: /root/.go
-    GOROOT: /usr/local/go
+    go_get: ['github.com/misoton665/beer-mug']
+    go_install ['github.com/misoton665/beer-mug']
+    GOPATH: /root/go
   roles:
-    - fubarhouse.golang
     - geerlingguy.repo-epel
+    - fubarhouse.golang
     - beer-mug
