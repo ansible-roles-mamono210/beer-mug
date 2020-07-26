@@ -4,6 +4,9 @@
   become: True
   vars:
     ansible_user: ansible
+    go_version: 1.9.4
+    GOPATH: /root/.go
+    GOROOT: /usr/local/go
   roles:
     - fubarhouse.golang
     - geerlingguy.repo-epel
