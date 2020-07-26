@@ -6,7 +6,7 @@
     ansible_user: ansible
     go_version: 1.9.4
     go_get: [github.com/misoton665/beer-mug]
-    go_install [github.com/misoton665/beer-mug]
+    go_install: [github.com/misoton665/beer-mug]
     GOPATH: /root/go
   roles:
     - geerlingguy.repo-epel
