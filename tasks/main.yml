@@ -1,6 +1,6 @@
 ---
 - name: Install dependencies
-  packages:
+  package:
     name: git
     state: present
 
