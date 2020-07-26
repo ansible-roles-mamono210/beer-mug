@@ -9,6 +9,7 @@
       - repo: https://github.com/misoton665/beer-mug.git
         dest: github.com/misoton665/beer-mug
         package: github.com/misoton665/beer-mug
+        version: master
     GOPATH: /root/go
   roles:
     - fubarhouse.golang
