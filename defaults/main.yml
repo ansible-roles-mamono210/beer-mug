@@ -1,1 +1,4 @@
 ---
+go_version: 1.9.4
+GOPATH: /root/.go
+GOROOT: /usr/local/go
