@@ -13,6 +13,7 @@ verifier:
   name: ansible
 scenario:
   test_sequence:
+    - dependenc
     - syntax
     - create
     - converge

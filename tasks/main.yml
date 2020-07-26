@@ -6,7 +6,7 @@
 
 - name: Install Golang
   package:
-    name: golang
+    name: golang-1.9.4
     state: present
 
 - name: Set path of Golang 1
