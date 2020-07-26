@@ -4,7 +4,7 @@
   environment:
     GOPATH: "{{ GOPATH }}"
     GOROOT: "{{ GOROOT }}"
-    PATH: "{{ GOPATH }/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ GOPATH }}/bin:{{ ansible_env.PATH }}"
 
 - name: Install beer-mug
   shell: go install github.com/misoton665/beer-mug
