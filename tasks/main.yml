@@ -1,4 +1,9 @@
 ---
+- name: Install dependencies
+  packages:
+    name: git
+    state: present
+
 - name: Download Golang binary
   unarchive:
     src: https://dl.google.com/go/go1.9.4.linux-amd64.tar.gz
