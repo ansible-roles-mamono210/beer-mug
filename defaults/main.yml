@@ -1,5 +1,5 @@
 ---
-go_version: 1.9.4
+go_version: 1.14.6
 go_install:
   - repo: https://github.com/misoton665/beer-mug.git
     dest: github.com/misoton665/beer-mug
