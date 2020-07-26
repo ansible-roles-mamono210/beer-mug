@@ -18,7 +18,7 @@ None
 Dependencies
 ------------
 
-None
+- fubarhouse.golang
 
 Example Playbook
 ----------------
