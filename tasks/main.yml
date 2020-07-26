@@ -1,9 +1,15 @@
 ---
 - name: Download beer-mug from github
   shell: go get github.com/misoton665/beer-mug
+  environment:
+    GOPATH: /root/.go
+    PATH: "/root/.go/bin:{{ ansible_env.PATH }}"
 
 - name: Install beer-mug
   shell: go install github.com/misoton665/beer-mug
+  environment:
+    GOPATH: /root/.go
+    PATH: "/root/.go/bin:{{ ansible_env.PATH }}"
 
 - name: Copy beer-mug binary to /usr/loca/bin/
   copy:
