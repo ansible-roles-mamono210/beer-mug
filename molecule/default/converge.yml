@@ -1,9 +1,8 @@
 ---
 - name: Converge
   hosts: all
-  become: true
+  become: True
   vars:
     ansible_user: ansible
   roles:
-    - geerlingguy.repo-epel
     - cowsay
