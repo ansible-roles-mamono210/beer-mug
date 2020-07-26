@@ -5,26 +5,15 @@
     dest: /usr/local/
     remote_src: yes
 
-- name: Set path of Golang 1
-  template:
-    src: go.sh
-    dest: /etc/profile.d/go.sh
-    force: no
-
-- name: Set path of Golang 2
-  shell: source /etc/profile.d/go.sh
-
 - name: Download beer-mug from github
   shell: go get github.com/misoton665/beer-mug
   environment:
-    GOPATH: /root/.go
-    PATH: "/root/.go/bin:{{ ansible_env.PATH }}"
+    PATH: "/usr/local/go/bin:{{ ansible_env.PATH }}"
 
 - name: Install beer-mug
   shell: go install github.com/misoton665/beer-mug
   environment:
-    GOPATH: /root/.go
-    PATH: "/root/.go/bin:{{ ansible_env.PATH }}"
+    PATH: "/usr/local/go/bin:{{ ansible_env.PATH }}"
 
 - name: Copy beer-mug binary to /usr/loca/bin/
   copy:
