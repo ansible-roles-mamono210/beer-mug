@@ -10,6 +10,16 @@
     dest: /usr/local/
     remote_src: yes
 
+- name: Download go-md2man from github
+  shell: go get github.com/cpuguy83/go-md2man
+  environment:
+    PATH: "/usr/local/go/bin:{{ ansible_env.PATH }}"
+
+- name: Install go-md2man
+  shell: go install github.com/cpuguy83/go-md2man
+  environment:
+    PATH: "/usr/local/go/bin:{{ ansible_env.PATH }}"
+
 - name: Download beer-mug from github
   shell: go get github.com/misoton665/beer-mug
   environment:
