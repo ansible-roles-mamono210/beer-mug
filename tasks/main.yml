@@ -1,43 +1,30 @@
 ---
 - name: Download Golang binary
   unarchive:
-    src: https://dl.google.com/go/go1.14.1.linux-amd64.tar.gz
+    src: https://dl.google.com/go/go1.9.4.linux-amd64.tar.gz
     dest: /usr/local/
     remote_src: yes
 
-- name: Set path of Golang
-  shell: echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile
+- name: Set path of Golang 1
+  template:
+    src: go.sh
+    dest: /etc/profile.d/go.sh
+    force: no
 
-- name: Check go version
-  command: go version
-  register: RESULTS
-  changed_when: no
-  ignore_errors: true
-  environment:
-    PATH: "/usr/local/go//bin:{{ ansible_env.PATH }}"
-
-- set_fact:
-    GO_PATH: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
-  when: RESULTS is not failed
-
-- debug:
-    var: GO_PATH
-
-#- name: Initialize module
-#  shell: go mod init github.com/misoton665/beer-mug
-#  environment:
-#    PATH: "/usr/local/go/bin:{{ ansible_env.PATH }}"
+- name: Set path of Golang 2
+  shell: source /etc/profile.d/go.sh
 
 - name: Download beer-mug from github
-  shell: GO111MODULE=off go get -u github.com/misoton665/beer-mug/...
+  shell: go get github.com/misoton665/beer-mug
   environment:
-    GOPATH: "{{ GO_PATH }}"
-    PATH: "/usr/local/go/bin:{{ ansible_env.PATH }}"
+    GOPATH: /root/.go
+    PATH: "/root/.go/bin:{{ ansible_env.PATH }}"
 
 - name: Install beer-mug
   shell: go install github.com/misoton665/beer-mug
   environment:
-    PATH: "/usr/local/go/bin:{{ ansible_env.PATH }}"
+    GOPATH: /root/.go
+    PATH: "/root/.go/bin:{{ ansible_env.PATH }}"
 
 - name: Copy beer-mug binary to /usr/loca/bin/
   copy:

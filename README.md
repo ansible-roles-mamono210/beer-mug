@@ -1,4 +1,4 @@
-[![](https://github.com/ansible-roles-matsumura/beer-mug/workflows/Build/badge.svg)](https://github.com/ansible-roles-matsumura/beer-mug/actions)
+[![](https://github.com/ansible-roles-matsumura/beer-mug/workflows/build/badge.svg)](https://github.com/ansible-roles-matsumura/beer-mug/actions)
 
 Role Description
 =========

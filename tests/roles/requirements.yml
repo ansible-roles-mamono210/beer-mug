@@ -1,4 +1,0 @@
----
-- src: https://github.com/ansible-roles-matsumura/beer-mug.git
-  version: '1109' 
-  name: matsumura.beer-mug
