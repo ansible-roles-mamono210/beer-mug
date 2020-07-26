@@ -1,5 +1,7 @@
 ---
 go_version: 1.9.4
-go_get: [github.com/misoton665/beer-mug]
-go_install: [github.com/misoton665/beer-mug]
+go_install:
+  - repo: https://github.com/misoton665/beer-mug.git
+    dest: github.com/misoton665/beer-mug
+    package: github.com/misoton665/beer-mug
 GOPATH: /root/go
