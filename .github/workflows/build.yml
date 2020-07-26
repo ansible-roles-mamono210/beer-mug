@@ -1,42 +1,74 @@
 ---
-name: Build
-on: push
+name: molecule
+on: [deployment, push]
 
 jobs:
-  deploy:
+  ansible-lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-#      - name: Ansible lint
-#        uses: ansible/ansible-lint-action@master
-#        with:
-#          targets: |
-#            tasks/main.yml
-#            tests/test.yml
-#
-      - name: Build CentOS7 image sudo installed
-        run: docker build tests/. -t centos7sudo
+      - name: Ansible lint
+        uses: ansible/ansible-lint-action@master
+        with:
+          targets: |
+            tasks/main.yml
+            molecule/default/converge.yml
+            molecule/default/verify.yml
 
-      - name: Docker run CentOS7 image sudo installed
-        run: sudo docker run -d -t --name=mycontainer centos7sudo
+  molecule:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro:
+          - centos7
+          - centos8
+        python-version:
+          - 3.6
+          - 3.7
+          - 3.8
 
-      - name: Install Ansible galaxy roles
-        run: ansible-galaxy install -r tests/roles/requirements.yml -p tests/roles
+    steps:
+      - uses: actions/checkout@v1
 
-      - name: Execute ansible-playbook command
-        run: ansible-playbook -i 'mycontainer,' -c docker tests/test.yml
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
 
-      - name: Check idempotency
-        run: ansible-playbook -i 'mycontainer,' -c docker tests/test.yml
+      - name: Cache pip
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('molecule/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            ${{ runner.os }}-
 
-      - name: Check if the command works
+      - name: Install dependencies
+        run: pip install -r molecule/requirements.txt
+
+      - name: Test with molecule
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DISTRO: ${{ matrix.distro }}
         run: |
-          docker exec --tty mycontainer env TERM=xterm beer-mug 
+          molecule test
 
-      - name: Show Ansible version
-        run: ansible --version
+  trailing-whitespace:
+    name: Find Trailing Whitespace
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: harupy/find-trailing-whitespace@56310d7
 
-      - name: Show OS information
-        run: docker exec --tty mycontainer env TERM=xterm cat /etc/redhat-release
+  lintAllTheThings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: yaml-lint
+        uses: ibiqlik/action-yamllint@665205c
+        with:
+          config_file: .yamllint
